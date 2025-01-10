@@ -9,7 +9,7 @@ from binance.um_futures import UMFutures
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 
-# Convirtiendo rn formato de aprendizaje supervisado.
+# Convirtiendo en formato de aprendizaje supervisado.
 def create_sequences(data, target_idx, sequence_length=60):
     X, y = [], []
     for i in range(len(data) - sequence_length):

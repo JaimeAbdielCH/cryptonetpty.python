@@ -1,0 +1,14 @@
+binance-connector
+numpy
+pandas
+tensorflow
+ta
+matplotlib 
+intel-tensorflow
+scikit-learn
+binance-connector
+binance-futures-connector
+torch
+torchvision
+torchaudio
+websocket

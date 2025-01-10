@@ -94,17 +94,6 @@ if __name__ == "__main__":
     predictions = model.predict(X_test)
     predictions = scaler_y.inverse_transform(predictions)
 
-    # # Plot predictions vs actuals
-    # actual_values = scaler_y.inverse_transform(y_test.reshape(-1, 1))
-    # plt.figure(figsize=(10, 6))
-    # plt.plot(actual_values, label='Actual Prices')
-    # plt.plot(predictions, label='Predicted Prices')
-    # plt.title(f'Predictions vs Actual Prices of {symbol}')
-    # plt.xlabel('Time')
-    # plt.ylabel('Price')
-    # plt.legend()
-    # plt.show()
-
     # Number of future steps to predict
     future_steps = 3
 

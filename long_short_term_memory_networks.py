@@ -17,16 +17,14 @@ def create_sequences(data, target_idx, sequence_length=60):
         y.append(data[i + sequence_length, target_idx])
     return np.array(X), np.array(y)
 
-
-# Funcion Principal
-if __name__ == "__main__":
+# Cargando data de binance api
+def loadData(symbol, interval, limit):
     # Cargar datos
-    symbol = 'BTCUSDT'
-    interval = '1d'
-    limit = '365'
     client = UMFutures()
     klines = client.klines(symbol=symbol, interval=interval, limit=limit)
-    data = pd.DataFrame(klines, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore'])
+    data = pd.DataFrame(klines, columns=['timestamp', 'open', 'high', 'low', 
+                                         'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 
+                                         'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore'])
     data['close'] = data['close'].astype(float)
 
 
@@ -47,6 +45,13 @@ if __name__ == "__main__":
     data.replace([np.inf, -np.inf], np.nan, inplace=True)
     data.dropna(inplace=True)
 
+    return data, features
+
+# Funcion Principal
+if __name__ == "__main__":
+    symbol = 'BTCUSDT'
+    #Cargando Data
+    features, data = loadData(symbol, '1d', '365')
     # Creando escala de los valores caracteristicos
     # y de nuestro objetivo.
     scaler_X = MinMaxScaler()
@@ -76,7 +81,8 @@ if __name__ == "__main__":
     model.compile(optimizer='adam', loss='mean_squared_error')
 
     # Entrenando modelo
-    history = model.fit(X_train, y_train, batch_size=32, epochs=20, validation_data=(X_test, y_test), callbacks=[tf.keras.callbacks.TerminateOnNaN()])
+    history = model.fit(X_train, y_train, batch_size=32, epochs=20, validation_data=(X_test, y_test), 
+                        callbacks=[tf.keras.callbacks.TerminateOnNaN()])
     # Salvando modelo
     model.save(f'{symbol}_{datetime.now().strftime("%Y-%m-%d")}.keras')
     

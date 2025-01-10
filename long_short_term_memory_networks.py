@@ -82,11 +82,11 @@ if __name__ == "__main__":
     
     # Grafico de entrenamiento y validacion
     plt.figure(figsize=(10, 6))
-    plt.plot(history.history['loss'], label='Training Loss')
-    plt.plot(history.history['val_loss'], label='Validation Loss')
-    plt.title('Model Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
+    plt.plot(history.history['loss'], label='Entrenamiento negativos')
+    plt.plot(history.history['val_loss'], label='Validaciones negativas')
+    plt.title('Media de acercamiento del modelo')
+    plt.xlabel('Epoca')
+    plt.ylabel('Valores negativos')
     plt.legend()
     plt.show()
 

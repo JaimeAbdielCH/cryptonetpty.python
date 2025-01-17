@@ -17,9 +17,13 @@ def create_sequences(data, target_idx, sequence_length=60):
         y.append(data[i + sequence_length, target_idx])
     return np.array(X), np.array(y)
 
-# Cargando data de binance api
-def loadData(symbol, interval, limit):
-    # Cargar datos
+
+
+# Funcion Principal
+if __name__ == "__main__":
+    symbol = 'XRPUSDT'
+    interval = '1d'
+    limit = 365
     client = UMFutures()
     klines = client.klines(symbol=symbol, interval=interval, limit=limit)
     data = pd.DataFrame(klines, columns=['timestamp', 'open', 'high', 'low', 
@@ -28,7 +32,7 @@ def loadData(symbol, interval, limit):
     data['close'] = data['close'].astype(float)
 
 
-    data['Date'] = pd.date_range('1/12/2024', '1/10/2025')
+    data['Date'] = pd.date_range('1/18/2024', '1/16/2025')
     data.set_index('Date', inplace=True)
 
     # Calculando indicadores tecnicos
@@ -39,19 +43,11 @@ def loadData(symbol, interval, limit):
 
     # Caracteristicas y objetivo 'close'
     features = ['open', 'high', 'low', 'close', 'volume', 'RSI', 'BB_Upper', 'BB_Lower']
-    target = 'close'
 
     # Descartar valores invalidos
     data.replace([np.inf, -np.inf], np.nan, inplace=True)
     data.dropna(inplace=True)
-
-    return data, features
-
-# Funcion Principal
-if __name__ == "__main__":
-    symbol = 'BTCUSDT'
-    #Cargando Data
-    features, data = loadData(symbol, '1d', '365')
+    
     # Creando escala de los valores caracteristicos
     # y de nuestro objetivo.
     scaler_X = MinMaxScaler()

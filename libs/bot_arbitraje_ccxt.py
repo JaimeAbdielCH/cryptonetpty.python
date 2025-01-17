@@ -18,7 +18,7 @@ print('Versión de CCXT:', ccxt.__version__)
 ####################################################################################
 # Bot de arbitraje simple que buscará oportunidades de arbitraje en los mercados ##
 # spot y las ejecutará utilizando órdenes de mercado.                                      
-# Descargo de responsabilidad: este bot es solo para fines educativos. Úselo bajo su propio riesgo. ##
+#    ##
 ####################################################################################
 
 # Opciones del bot

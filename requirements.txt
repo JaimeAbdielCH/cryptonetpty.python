@@ -12,3 +12,17 @@ torch
 torchvision
 torchaudio
 websocket
+ccxt
+tornado
+
+firebase-admin
+pdf2image
+pytesseract
+langchain
+openai
+langchain-openai
+langchain-community 
+langchainhub
+pydantic
+chromadb
+bs4
